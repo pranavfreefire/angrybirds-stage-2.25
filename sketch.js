@@ -33,13 +33,22 @@ function setup(){
     box5 = new Box(810,160,70,70);
     log4 = new Log(760,120,150, PI/7);
     log5 = new Log(870,120,150, -PI/7);
-
+    log6 = new Log(100,200,100,PI)
     bird = new Bird(100,100);
+    var options= {
+bodyA:bird.body,
+bodyB:log6.body,
+length:10,
+stiffness:0.06,
+    }
 
+    chain=Matter.Constraint.create(options) 
+   World.add(world,chain)
 }
 
 function draw(){
     background(backgroundImg);
+    line (bird.body.position.x,bird.body.position.y,log6.body.position.x,log6.body.position.y)
     Engine.update(engine);
     console.log(box2.body.position.x);
     console.log(box2.body.position.y);
@@ -58,7 +67,8 @@ function draw(){
     box5.display();
     log4.display();
     log5.display();
-
+    log6.display();
     bird.display();
     platform.display();
+
 }
